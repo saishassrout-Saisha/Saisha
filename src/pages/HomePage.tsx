@@ -4,7 +4,7 @@ import Hero from "../components/Hero";
 import ThreeDModel from "../components/ThreeDModel";
 import ServiceCard from "../components/ServiceCard";
 import Stats from "../components/Stats";
-import { ClipboardCheck, Recycle, Layers, Factory } from "lucide-react";
+import { ClipboardCheck, Recycle, Layers, Factory, Users, BarChart, TrendingDown, Settings, Grid } from "lucide-react";
 
 const HomePage: React.FC = () => {
   const introRef = useRef<HTMLDivElement | null>(null);
@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
       {/* Hero Section */}
       <section className="relative z-0 overflow-visible">
         <Hero
-          title="SAIsha Plastics Management Consultant"
+          title="SAIsha Plastics Management Consultant Solutions"
           subtitle="Specialized consulting for the Plastics/Polymer Industry and beyond. Transform your operations with proven methodologies."
           buttonText="Explore Our Services"
           buttonLink="/services"
@@ -112,44 +112,75 @@ const HomePage: React.FC = () => {
 
       {/* Services Section */}
       <section className="py-16 md:py-24 bg-slate-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Our Specialized Services
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ServiceCard
-              title="RAFFIA Industry Specialization"
-              description="Expert services for tape lines, circular looms, FIBC, BOPP, and PP-PE fabrics."
-              icon={<Factory size={24} />}
-              delay={3}
-              link="/services#raffia"
-            />
-            <ServiceCard
-              title="Geotextile Solutions"
-              description="Complete solutions for woven & non-woven geotextiles..."
-              icon={<Layers size={24} />}
-              delay={1}
-              link="/services#geotextile"
-            />
-            <ServiceCard
-              title="Recycle Enhancement & Reduction"
-              description="Increase recycle usage and reduce waste generation..."
-              icon={<Recycle size={24} />}
-              delay={2}
-              link="/services#sustainability"
-            />
-            <ServiceCard
-              title="Lean, 5S & ISO Integration"
-              description="Comprehensive implementation of Lean methodologies..."
-              icon={<ClipboardCheck size={24} />}
-              delay={0}
-              link="/services#integrated-management"
-            />
-          </div>
-        </div>
-      </section>
+  <div className="container mx-auto px-4">
+    <div className="text-center max-w-3xl mx-auto mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        Our Specialized Services
+      </h2>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <ServiceCard
+        title="Geotextile Manufacturing"
+        description="Comprehensive consulting for both woven and non-woven geotextile manufacturing processes."
+        icon={<Layers size={24} />}
+        delay={0}
+        link="/services#geotextile"
+      />
+
+      <ServiceCard
+        title="Geosynthetics Product Manufacturing"
+        description="Expert guidance for manufacturing other geosynthetic products with optimized processes."
+        icon={<Grid size={24} />}
+        delay={1}
+        link="/services#geosynthetics"
+      />
+
+      <ServiceCard
+        title="RAFFIA Industry Solutions"
+        description="Specialized solutions for tape lines, circular looms, FIBC, BOPP, and PP/PE fabric manufacturing."
+        icon={<Factory size={24} />}
+        delay={2}
+        link="/services#raffia"
+      />
+
+      <ServiceCard
+        title="Plastics Machinery Consulting"
+        description="Machinery selection, installation, commissioning, and performance optimization."
+        icon={<Settings size={24} />}
+        delay={3}
+        link="/services#machinery"
+      />
+
+      <ServiceCard
+        title="Cost Reduction Strategies"
+        description="Focused cost reduction in manpower, energy, maintenance, consumables, and raw materials."
+        icon={<TrendingDown size={24} />}
+        delay={4}
+        link="/services#cost-reduction"
+      />
+
+      <ServiceCard
+        title="P & L Management"
+        description="End-to-end profit & loss management to improve financial performance and sustainability."
+        icon={<BarChart size={24} />}
+        delay={5}
+        link="/services#pl-management"
+      />
+
+      <ServiceCard
+        title="Training & Development"
+        description="Customized training programs for operations, quality, sustainability, and Industry 4.0."
+        icon={<Users size={24} />}
+        delay={6}
+        link="/services#training"
+      />
+
+    </div>
+  </div>
+</section>
+
 
       <Stats stats={stats} />
     </div>
