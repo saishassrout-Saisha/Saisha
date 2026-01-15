@@ -58,7 +58,7 @@ Submitted at: ${new Date().toLocaleString()}
 
     await transporter.sendMail({
       from: `"Contact Form" <${process.env.EMAIL_USER}>`,
-      to: 'vigljku@gmail.com', // Your destination email
+      to: 'saisha.ssrout@gmail.com', // Your destination email
       subject: `New Contact Form Submission from ${name}`,
       text: emailContent,
       html: `
