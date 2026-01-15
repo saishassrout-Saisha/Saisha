@@ -63,7 +63,7 @@ Welcome to **SAIsha Plastics Management Consultant** — specialized consulting 
 +(91)- 8XXXXX4524 / 9XXXXX1005
 
 **Email:**  
-ssrout0@gmail.com
+saisha.ssrout@gmail.com
 
 ---
 

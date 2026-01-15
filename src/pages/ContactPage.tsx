@@ -20,7 +20,7 @@ const ContactPage: React.FC = () => {
     {
       icon: <Mail size={24} />,
       title: "Email Address",
-      details: "ssrout0@gmail.com"
+      details: "saisha.ssrout@gmail.com"
     },
     {
       icon: <Clock size={24} />,
