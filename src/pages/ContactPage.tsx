@@ -1,33 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Hero from '../components/Hero';
 import ContactForm from '../components/ContactForm';
-import { MapPin, Phone, Mail, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const ContactPage: React.FC = () => {
   const [isFormVisible, setIsFormVisible] = useState(true);
+  const location = useLocation(); // track route changes
+
   const contactInfo = [
-    {
-      icon: <MapPin size={24} />,
-      title: "Office Address",
-      details: "200 Shivam Society, Manjalpur, Vadodara- 392011 (Gujarat) India"
-    },
-    {
-      icon: <Phone size={24} />,
-      title: "Phone Numbers",
-      details: "+(91)- 83XXXXXXX4 / 99XXXXXXX5"
-    },
-    {
-      icon: <Mail size={24} />,
-      title: "Email Address",
-      details: "saisha.ssrout@gmail.com"
-    },
-    {
-      icon: <Clock size={24} />,
-      title: "Contact Person",
-      details: "Mr. Sudhansu Sekhar Rout"
-    }
+    { icon: <MapPin size={24} />, title: "Office Address", details: "200 Shivam Society, Manjalpur, Vadodara- 392011 (Gujarat) India" },
+    { icon: <Phone size={24} />, title: "Phone Numbers", details: "+(91)- 83XXXXXXX4 / 99XXXXXXX5" },
+    { icon: <Mail size={24} />, title: "Email Address", details: "saisha.ssrout@gmail.com" },
+    { icon: <Clock size={24} />, title: "Contact Person", details: "Mr. Sudhansu Sekhar Rout" }
   ];
+
+  // ✅ Scroll to top whenever this page is navigated to
+  useEffect(() => {
+    // Delay ensures page is mounted before scrolling
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 50);
+  }, [location.pathname]);
 
   return (
     <div>
@@ -37,20 +32,8 @@ const ContactPage: React.FC = () => {
         showSecondaryButton={false}
       />
 
-      {/* Contact Section */}
       <section id="contact-form" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
-          {/* Toggle Button */}
-          {/* <div className="text-center mb-8">
-            <button
-              onClick={() => setIsFormVisible(!isFormVisible)}
-              className="btn btn-primary flex items-center justify-center mx-auto gap-2"
-            >
-              {isFormVisible ? 'Hide Contact Form' : 'Show Contact Form'}
-              {isFormVisible ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-            </button>
-          </div> */}
-
           <AnimatePresence>
             {isFormVisible && (
               <motion.div
@@ -61,44 +44,43 @@ const ContactPage: React.FC = () => {
                 className="overflow-hidden"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's Start a Conversation</h2>
-                <p className="text-slate-600 mb-8">
-                  We're excited to hear from you! Whether you have a question about our services, 
-                  want to discuss a potential project, or are ready to start working with us, 
-                  our team is here to help.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  {contactInfo.map((item, index) => (
+                  <div>
                     <motion.div
-                      key={index}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      transition={{ duration: 0.5 }}
                       viewport={{ once: true }}
-                      className="flex items-start space-x-4"
                     >
-                      <div className="bg-primary-100 p-3 rounded-lg text-primary-600 mt-1">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold mb-1">{item.title}</h4>
-                        <p className="text-slate-600">{item.details}</p>
+                      <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's Start a Conversation</h2>
+                      <p className="text-slate-600 mb-8">
+                        We're excited to hear from you! Whether you have a question about our services, 
+                        want to discuss a potential project, or are ready to start working with us, 
+                        our team is here to help.
+                      </p>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        {contactInfo.map((item, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                            className="flex items-start space-x-4"
+                          >
+                            <div className="bg-primary-100 p-3 rounded-lg text-primary-600 mt-1">
+                              {item.icon}
+                            </div>
+                            <div>
+                              <h4 className="text-lg font-semibold mb-1">{item.title}</h4>
+                              <p className="text-slate-600">{item.details}</p>
+                            </div>
+                          </motion.div>
+                        ))}
                       </div>
                     </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-            
-            <ContactForm />
+                  </div>
+                  <ContactForm />
                 </div>
               </motion.div>
             )}
@@ -134,25 +116,13 @@ const ContactPage: React.FC = () => {
             >
               Frequently Asked Questions
             </motion.h2>
-            
+
             <div className="space-y-6">
               {[
-                {
-                  question: "What services do you offer?",
-                  answer: "We offer comprehensive services including Lean & 5S Implementation, ISO Standard implementation & certifications, Customer Complaint Reduction, Process Wastage Reduction, Cost Reduction (Manpower, Electricity, Maintenance, Consumable & Packing), RM Composition Cost optimization, Recycle usage enhancement, Process Optimization, New Product Development, and P & L management."
-                },
-                {
-                  question: "Do you provide training services?",
-                  answer: "Yes, we provide training in all areas of our services, including Sustainability & Industry 4.0 implementation."
-                },
-                {
-                  question: "What is your experience in the industry?",
-                  answer: "Our Managing Director, Mr. Sudhansu Sekhar Rout, has 35 years of experience from Plant shop floor to Top Management, making us experts in the field of Plastics/Polymer Industry."
-                },
-                {
-                  question: "What types of molding processes do you specialize in?",
-                  answer: "We have specialized teams for Injection Molding, Extrusion, Blow Molding, Rotational Molding, and Rubber Processing."
-                }
+                { question: "What services do you offer?", answer: "We offer comprehensive services including Lean & 5S Implementation, ISO Standard implementation & certifications, Customer Complaint Reduction, Process Wastage Reduction, Cost Reduction (Manpower, Electricity, Maintenance, Consumable & Packing), RM Composition Cost optimization, Recycle usage enhancement, Process Optimization, New Product Development, and P & L management." },
+                { question: "Do you provide training services?", answer: "Yes, we provide training in all areas of our services, including Sustainability & Industry 4.0 implementation." },
+                { question: "What is your experience in the industry?", answer: "Our Managing Director, Mr. Sudhansu Sekhar Rout, has 35 years of experience from Plant shop floor to Top Management, making us experts in the field of Plastics/Polymer Industry." },
+                { question: "What types of molding processes do you specialize in?", answer: "We have specialized teams for Injection Molding, Extrusion, Blow Molding, Rotational Molding, and Rubber Processing." }
               ].map((faq, index) => (
                 <motion.div
                   key={index}

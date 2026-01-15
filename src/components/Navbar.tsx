@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  // Scroll listener for header transparency
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -17,8 +20,15 @@ const Navbar: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // check initial scroll
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Reset scroll state and close mobile menu on route change
+  useEffect(() => {
+    setIsScrolled(window.scrollY > 20);
+    setIsOpen(false);
+  }, [location]);
 
   const navLinks = [
     { title: 'Home', path: '/' },
@@ -26,25 +36,39 @@ const Navbar: React.FC = () => {
     { title: 'Services', path: '/services' },
   ];
 
+  // Handle Contact button click
+  const handleContactClick = () => {
+    if (location.pathname === '/contact') {
+      // Already on contact page, just scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Navigate to contact page
+      navigate('/contact');
+    }
+    setIsOpen(false); // close mobile menu
+  };
+
   return (
-    <header 
+    <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-lg py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <NavLink 
-          to="/" 
+        <NavLink
+          to="/"
           className={({ isActive }) =>
             `flex items-center space-x-2 transition-all duration-300 ${
               isActive ? 'scale-105' : 'hover:scale-105'
             }`
           }
         >
-          <span className="text-2xl font-bold font-display gradient-text">
-            SAIsha
-          </span>
-          <span className={`hidden md:inline text-lg transition-colors duration-300 ${isScrolled ? 'text-slate-800' : 'text-white'}`}>
+          <span className="text-2xl font-bold font-display gradient-text">SAIsha</span>
+          <span
+            className={`hidden md:inline text-lg transition-colors duration-300 ${
+              isScrolled ? 'text-slate-800' : 'text-white'
+            }`}
+          >
             Plastics Management Consultant
           </span>
         </NavLink>
@@ -62,8 +86,8 @@ const Navbar: React.FC = () => {
                       ? 'text-primary-600 font-semibold'
                       : 'text-white font-semibold'
                     : isScrolled
-                      ? 'text-slate-700 hover:text-primary-600'
-                      : 'text-white/90 hover:text-white'
+                    ? 'text-slate-700 hover:text-primary-600'
+                    : 'text-white/90 hover:text-white'
                 } ${
                   isActive
                     ? 'after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-accent-500 after:rounded-full'
@@ -74,14 +98,14 @@ const Navbar: React.FC = () => {
               {link.title}
             </NavLink>
           ))}
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `btn ${isActive ? 'btn-secondary' : 'btn-primary'}`
-            }
+
+          {/* Contact Button */}
+          <button
+            onClick={handleContactClick}
+            className="btn btn-primary"
           >
             Contact Us
-          </NavLink>
+          </button>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -120,15 +144,14 @@ const Navbar: React.FC = () => {
                   {link.title}
                 </NavLink>
               ))}
-              <NavLink
-                to="/contact"
-                onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  `btn text-center ${isActive ? 'btn-secondary' : 'btn-primary'}`
-                }
+
+              {/* Mobile Contact Button */}
+              <button
+                onClick={handleContactClick}
+                className="btn text-center btn-primary"
               >
                 Contact Us
-              </NavLink>
+              </button>
             </div>
           </motion.div>
         )}
