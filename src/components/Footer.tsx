@@ -47,19 +47,24 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="space-y-6">
-            <h4 className="text-lg font-semibold text-white">Our Services</h4>
-            <ul className="space-y-3">
-              {[
-                'Lean, 5S & ISO Integration',
-                'Geotextile Solutions',
-                'RAFFIA Industry Services',
-                'Recycle Enhancement',
-                'Geosynthetic Products',
-              ].map((service, index) => (
-                <li key={index} className="text-slate-200">{service}</li>
-              ))}
-            </ul>
-          </div>
+  <h4 className="text-lg font-semibold text-white">Our Services</h4>
+  <ul className="space-y-3">
+    {[
+      'Geotextile Manufacturing (Woven & Non-Woven)',
+      'Geosynthetics Product Manufacturing',
+      'RAFFIA Industry Solutions',
+      'Plastics Machinery Selection, Installation & Commissioning',
+      'Cost Reduction Strategies',
+      'P & L Management',
+      'Training & Development',
+    ].map((service, index) => (
+      <li key={index} className="text-slate-200">
+        {service}
+      </li>
+    ))}
+  </ul>
+</div>
+
 
           <div className="space-y-6">
             <h4 className="text-lg font-semibold text-white">Contact Info</h4>
