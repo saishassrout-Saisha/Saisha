@@ -5,6 +5,7 @@ import ThreeDModel from "../components/ThreeDModel";
 import ServiceCard from "../components/ServiceCard";
 import Stats from "../components/Stats";
 import { ClipboardCheck, Recycle, Layers, Factory, Users, BarChart, TrendingDown, Settings, Grid } from "lucide-react";
+import Seo from "../seo/Seo";
 
 const HomePage: React.FC = () => {
   const introRef = useRef<HTMLDivElement | null>(null);
@@ -42,8 +43,43 @@ const HomePage: React.FC = () => {
     { value: "50+", label: "Projects Completed" },
   ];
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || "https://saisha-plastics.vercel.app";
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "SAIsha Plastics Management Consultant",
+    url: siteUrl,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: "+91-8384844524",
+        email: "saisha.ssrout@gmail.com",
+        areaServed: "IN",
+        availableLanguage: ["English", "Hindi"],
+      },
+    ],
+    serviceOffered: [
+      "Geotextile Manufacturing Consulting",
+      "Geosynthetics Product Manufacturing",
+      "RAFFIA Industry Solutions",
+      "Plastics Machinery Consulting",
+      "Cost Reduction Strategies",
+      "P & L Management",
+      "Training & Development",
+    ],
+  };
+
   return (
-    <div className="relative overflow-visible">
+    <>
+      <Seo
+        title="SAIsha Plastics Management Consultant | Plastics & Polymer Consulting"
+        description="Specialized consulting for plastics and polymer manufacturing: geotextiles, geosynthetics, RAFFIA solutions, machinery selection, cost reduction, and sustainability."
+        keywords="plastics consulting, polymer consulting, geotextile consulting, RAFFIA industry, plastics machinery selection, cost reduction, sustainability, circular economy"
+        canonicalPath="/"
+        structuredData={organizationSchema}
+      />
+      <div className="relative overflow-visible">
       {/* Hero Section */}
       <section className="relative z-0 overflow-visible">
         <Hero
@@ -183,7 +219,8 @@ const HomePage: React.FC = () => {
 
 
       <Stats stats={stats} />
-    </div>
+      </div>
+    </>
   );
 };
 

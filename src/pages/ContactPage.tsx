@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import ContactForm from '../components/ContactForm';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import Seo from '../seo/Seo';
 
 const ContactPage: React.FC = () => {
   const [isFormVisible, setIsFormVisible] = useState(true);
@@ -11,10 +12,31 @@ const ContactPage: React.FC = () => {
 
   const contactInfo = [
     { icon: <MapPin size={24} />, title: "Office Address", details: "200 Shivam Society, Manjalpur, Vadodara- 392011 (Gujarat) India" },
-    { icon: <Phone size={24} />, title: "Phone Numbers", details: "+(91)- 83XXXXXXX4 / 99XXXXXXX5" },
+    { icon: <Phone size={24} />, title: "Phone Numbers", details: "+(91)- 8384844524" },
     { icon: <Mail size={24} />, title: "Email Address", details: "saisha.ssrout@gmail.com" },
     { icon: <Clock size={24} />, title: "Contact Person", details: "Mr. Sudhansu Sekhar Rout" }
   ];
+
+  const siteUrl = import.meta.env.VITE_SITE_URL || "https://saisha-plastics.vercel.app";
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url: `${siteUrl}/contact`,
+    mainEntity: {
+      "@type": "Organization",
+      name: "SAIsha Plastics Management Consultant",
+      url: siteUrl,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+91-83XXXXXXX4",
+          contactType: "customer service",
+          areaServed: "IN",
+          availableLanguage: ["English", "Hindi"],
+        },
+      ],
+    },
+  };
 
   // ✅ Scroll to top whenever this page is navigated to
   useEffect(() => {
@@ -25,7 +47,15 @@ const ContactPage: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div>
+    <>
+      <Seo
+        title="Contact SAIsha Plastics Management Consultant"
+        description="Reach SAIsha Plastics Management Consultant for plastics and polymer consulting inquiries, partnerships, and project discussions."
+        keywords="contact saisha plastics, plastics consulting contact, polymer consulting contact"
+        canonicalPath="/contact"
+        structuredData={contactSchema}
+      />
+      <div>
       <Hero 
         title="Contact Us"
         subtitle="Get in touch with our expert team for inquiries, consultations, or partnership opportunities"
@@ -141,6 +171,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

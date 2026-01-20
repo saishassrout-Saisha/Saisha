@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
+import Seo from '../seo/Seo';
 import { ClipboardCheck, Settings, TrendingUp, Lightbulb, Recycle, AlignCenterVertical as Certificate, Target, Shield, Users, BarChart, LineChart, Battery, Zap, Package, Repeat, FileText, Layers, Globe, Factory } from 'lucide-react';
 
 const ServicesPage: React.FC = () => {
@@ -172,8 +173,31 @@ const ServicesPage: React.FC = () => {
     }
   ];
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://saisha-plastics.vercel.app';
+  const servicesSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Plastics & Polymer Consulting Services',
+    url: `${siteUrl}/services`,
+    provider: {
+      '@type': 'Organization',
+      name: 'SAIsha Plastics Management Consultant',
+      url: siteUrl,
+    },
+    areaServed: 'Worldwide',
+    serviceType: services.flatMap((category) => category.items.map((item) => item.title)),
+  };
+
   return (
-    <div>
+    <>
+      <Seo
+        title="Plastics & Polymer Consulting Services | SAIsha"
+        description="Comprehensive consulting across geotextiles, RAFFIA, sustainability, cost reduction, machinery selection, and training for plastics and polymer manufacturing."
+        keywords="plastics consulting services, polymer consulting, RAFFIA services, geotextile consulting, manufacturing optimization"
+        canonicalPath="/services"
+        structuredData={servicesSchema}
+      />
+      <div>
       <Hero 
         title="Our Services"
         subtitle="Specialized consulting services for the Plastics/Polymer Industry"
@@ -276,6 +300,7 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

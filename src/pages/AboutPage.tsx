@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import { Users, Award, Clock, Briefcase } from 'lucide-react';
+import Seo from '../seo/Seo';
 
 const AboutPage: React.FC = () => {
   const stats = [
@@ -35,8 +36,36 @@ const AboutPage: React.FC = () => {
     },
   ];
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://saisha-plastics.vercel.app';
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About SAIsha Plastics Management Consultant',
+    url: `${siteUrl}/about`,
+    description:
+      'Learn about SAIsha Plastics Management Consultant and our experience delivering plastics and polymer consulting solutions.',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'SAIsha Plastics Management Consultant',
+      url: siteUrl,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'saisha.ssrout@gmail.com',
+      },
+    },
+  };
+
   return (
-    <div>
+    <>
+      <Seo
+        title="About SAIsha Plastics Management Consultant"
+        description="35+ years of plastics and polymer industry leadership. Discover SAIsha's mission, vision, and specialized teams in injection molding, extrusion, and geotextiles."
+        keywords="about saisha plastics, polymer consulting experts, plastics industry specialists, geotextile consultants"
+        canonicalPath="/about"
+        structuredData={aboutSchema}
+      />
+      <div>
       <Hero 
         title="About SAIsha Plastics Management Consultant"
         subtitle="Specialized consulting for the Plastics/Polymer Industry and beyond"
@@ -298,6 +327,7 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
