@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import { Users, Award, Clock, Briefcase } from 'lucide-react';
 import Seo from '../seo/Seo';
+import { Link } from "react-router-dom";
 
 const AboutPage: React.FC = () => {
   const stats = [
@@ -320,9 +321,11 @@ const AboutPage: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <a href="/contact" className="btn btn-primary">
-              Contact Us Today
-            </a>
+
+
+          <Link to="/contact" className="btn btn-primary">
+            Contact Us Today
+          </Link>
           </motion.div>
         </div>
       </section>
